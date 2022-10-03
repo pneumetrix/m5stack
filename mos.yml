@@ -10,6 +10,10 @@ includes:
 filesystem:
   - fs
 config_schema:
+  - ["m5", "o", {title: "Configuration for M5Stack"}]
+  - ["m5.backlight_voltage", "i", 2800, {title: "Display Voltage in mV"}]
+  - ["m5.vibrator_voltage", "i", 3000, {title: "Vibrator Voltage in mV"}]
+  - ["m5.bus_power", "b", true, {title: "Enable Bus Power Supply 5V"}]
   - ["i2c.enable", true]
   - ["i2c.freq", 400000]
   - ["i2c.sda_gpio", 21]

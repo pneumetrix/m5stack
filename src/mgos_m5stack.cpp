@@ -9,7 +9,11 @@ RTC* rtc = nullptr;
 bool mgos_m5stack_init(void) {
   axp = new AXP192();
   axp->begin();
-  axp->SetBusPowerMode(0);
+  if(mgos_sys_config_get_m5_bus_power()){
+    axp->SetBusPowerMode(1);
+  }else{
+    axp->SetBusPowerMode(0);
+  }
   rtc = new RTC();
   RTC_TimeTypeDef timeobj;
   rtc->GetTime(& timeobj);

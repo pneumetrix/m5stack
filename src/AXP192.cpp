@@ -4,12 +4,13 @@ AXP192::AXP192()
 {
 }
 
+/*
 // Will be deprecated
 void AXP192::begin(mbus_mode_t mode)
 {
     begin();
 }
-
+*/
 void AXP192::begin()
 {
     /* global setting in config
@@ -38,13 +39,15 @@ void AXP192::begin()
     SetESPVoltage(3350);
     LOG(LL_INFO, ("axp: esp32 power voltage was set to 3.35v"));
 
-    SetLcdVoltage(1000);
+    SetLcdVoltage(2800);
+    //SetLcdVoltage(mgos_sys_config_get_m5_backlight_voltage());
     LOG(LL_INFO, ("axp: lcd backlight voltage was set to 2.80v"));
 
     SetLDOVoltage(2, 3300); //Periph power voltage preset (LCD_logic, SD card)
     LOG(LL_INFO, ("axp: lcd logic and sdcard voltage preset to 3.3v"));
 
-    SetLDOVoltage(3, 3000); // LCD backlight ( for Tough )
+    SetLDOVoltage(3, 3000);
+    //SetLDOVoltage(3, mgos_sys_config_get_m5_vibrator_voltage()); // LCD backlight ( for Tough )
     LOG(LL_INFO, ("axp: vibrator voltage preset to 2v"));
 
     SetLDOEnable(2, true);
@@ -65,11 +68,11 @@ void AXP192::begin()
 
     Write1Byte(0x82,0xff);
 
-    //SetLCDRSet(0);
+    SetLCDRSet(0);
     //delay(100);
     mgos_msleep(100);
 
-    //SetLCDRSet(1);
+    SetLCDRSet(1);
     //delay(100);
     mgos_msleep(100);
 
